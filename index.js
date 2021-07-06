@@ -14,7 +14,7 @@ app.listen(3000, (err) => {
     throw new Error(err);
   }
   console.info(">".repeat(40));
-  console.info("💻  We Care API alive");
+  console.info("💻  WE CARE API ALIVE");
   console.info(`📡  PORT: http://localhost:3000`);
   console.info(">".repeat(40) + "\n");
 });

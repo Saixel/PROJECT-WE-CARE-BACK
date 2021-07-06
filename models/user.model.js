@@ -22,6 +22,13 @@ const userSchema = mongoose.Schema({
   name: String,
   phone: Number,
   image: String,
+  description: String,
+  collective: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "collectives",
+    },
+  ],
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -54,4 +61,4 @@ const userSchema = mongoose.Schema({
   ],
 });
 
-exports.User = mongoose.model("user", userSchema);
+exports.User = mongoose.model("users", userSchema);

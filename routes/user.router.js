@@ -18,8 +18,8 @@ const {
 // router.post("/", authenticate, authorize("admin"), signup);
 router.get("/me", authenticate, whoami);
 router.get("/", authenticate, authorize("admin"), getUsers);
-router.get("/:userId", authenticate, authorize("admin"), getUserById);
 router.get("/professionals", getProfessionals);
+router.get("/:userId", authenticate, authorize("admin"), getUserById);
 // router.get("/professionals/:userId", getProfessionalById);
 // router.put("/", authenticate, authorize(["master", "admin"]), updateUser);
 router.delete("/:userId", authenticate, authorize("admin"), deleteUser);
