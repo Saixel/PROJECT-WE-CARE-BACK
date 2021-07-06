@@ -1,17 +1,18 @@
 const mongoose = require("mongoose");
 
-const packageSchema = mongoose.Schema({
+const newSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Title is required"],
   },
-  description: {
+  body: {
     type: String,
-    required: [true, "Description is required"],
+    required: [true, "Body is required"],
   },
-  price: {
+  type: {
     type: String,
-    enum: ["paid", "free"],
+    enum: ["news", "interviews"],
+    default: "news",
   },
   date: {
     type: Date,
@@ -27,12 +28,6 @@ const packageSchema = mongoose.Schema({
       ref: "collectives",
     },
   ],
-  content: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "activities",
-    },
-  ],
 });
 
-exports.Package = mongoose.model("packages", packageSchema);
+exports.New = mongoose.model("news", newSchema);

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const packageSchema = mongoose.Schema({
+const activitySchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Title is required"],
@@ -8,14 +8,6 @@ const packageSchema = mongoose.Schema({
   description: {
     type: String,
     required: [true, "Description is required"],
-  },
-  price: {
-    type: String,
-    enum: ["paid", "free"],
-  },
-  date: {
-    type: Date,
-    default: Date.now,
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -27,12 +19,7 @@ const packageSchema = mongoose.Schema({
       ref: "collectives",
     },
   ],
-  content: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "activities",
-    },
-  ],
+  phrase: String,
 });
 
-exports.Package = mongoose.model("packages", packageSchema);
+exports.Activity = mongoose.model("activities", activitySchema);
