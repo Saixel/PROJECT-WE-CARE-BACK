@@ -5,9 +5,10 @@ const activitySchema = mongoose.Schema({
     type: String,
     required: [true, "Title is required"],
   },
-  description: {
+  description: String,
+  instructions: {
     type: String,
-    required: [true, "Description is required"],
+    required: [true, "Instructions are required"],
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,

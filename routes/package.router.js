@@ -3,6 +3,7 @@ const router = require("express").Router();
 const { authenticate, authorize } = require("../utils/auth");
 
 const {
+  createPackage,
   getPackages,
   getPackagesByCollective,
   getPackagesByAuthor,
@@ -10,7 +11,7 @@ const {
   getPackageById,
 } = require("../controller/package.controller");
 
-// router.post("/", authenticate, authorize("admin"), createPackage);
+router.post("/", createPackage);
 router.get("/", getPackages);
 router.get("/collective/:collectiveId", getPackagesByCollective);
 router.get("/author/:authorId", getPackagesByAuthor);

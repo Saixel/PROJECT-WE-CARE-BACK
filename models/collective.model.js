@@ -6,6 +6,7 @@ const collectiveSchema = mongoose.Schema({
     required: [true, "Name is required"],
     unique: [true, "This collective already exists"],
   },
+  initials: String,
 });
 
 exports.Collective = mongoose.model("collectives", collectiveSchema);

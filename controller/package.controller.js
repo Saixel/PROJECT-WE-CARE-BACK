@@ -1,10 +1,42 @@
 const { Package } = require("../models/package.model");
+const { Collective } = require("../models/collective.model");
 
-// exports.createPackage = (req, res) => {};
+exports.createPackage = (req, res) => {
+  Package.create(req.body)
+    .then((package) => res.status(200).json({
+            id: package._id,
+            title: package.title,
+            description: package.description,
+            instructions: package.instructions,
+            price: package.price,
+            date: package.date,
+            author: package.author,
+            collective: package.collective,
+            content: package.content,
+          }))
+    .catch((err) => res.status(500).json(err));
+};
 
 exports.getPackages = (req, res) => {
   Package.find()
-    .then((packages) => res.status(200).json(packages))
+    .populate("collective")
+    .then((packages) => {
+      res.status(200).json(
+        packages.map(function (package) {
+          return {
+            id: package._id,
+            title: package.title,
+            description: package.description,
+            instructions: package.instructions,
+            price: package.price,
+            date: package.date,
+            author: package.author,
+            collective: package.collective,
+            content: package.content,
+          };
+        })
+      );
+    })
     .catch((err) => res.status(500).json(err));
 };
 

@@ -8,7 +8,8 @@ const {
   whoami,
   getUsers,
   getProfessionals,
-  // getProfessionalById,
+  getProfessionalById,
+  getUserById,
 } = require("../controller/user.controller");
 
 // router.post("/", authenticate, authorize("admin"), signup);
@@ -16,8 +17,8 @@ router.post("/", signup);
 router.get("/me", whoami);
 router.get("/", getUsers);
 router.get("/professionals", getProfessionals);
-// router.get("/professionals/:userId", getProfessionalById);
-// router.get("/:userId", authenticate, authorize("admin"), getUserById);
+router.get("/professionals/:userId", getProfessionalById);
+router.get("/:userId", getUserById);
 // router.put("/:userId", authenticate, authorize("admin"), updateUser);
 // router.delete("/:userId", authenticate, authorize("admin"), deleteUser);
 

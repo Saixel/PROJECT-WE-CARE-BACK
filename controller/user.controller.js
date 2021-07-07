@@ -1,4 +1,6 @@
 const { User } = require("../models/user.model");
+const { Collective } = require("../models/collective.model");
+const { Package } = require("../models/package.model");
 
 exports.whoami = (req, res) => {
   res.status(200).json(res.locals.user);
@@ -6,21 +8,106 @@ exports.whoami = (req, res) => {
 
 exports.getUsers = (req, res) => {
   User.find()
-    .then((user) => res.status(200).json(user))
+    .populate("collective")
+    .then((users) => {
+      res.status(200).json(
+        users.map(function (user) {
+          return {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+            name: user.name,
+            phone: user.phone,
+            image: user.image,
+            description: user.description,
+            collective: user.collective,
+            following: user.following,
+            followers: user.followers,
+            createdActivites: user.createdActivites,
+            createdPacks: user.createdPacks,
+            purchasedPacks: user.purchasedPacks,
+          };
+        })
+      );
+    })
     .catch((err) => res.status(500).json(err));
 };
 
 exports.getProfessionals = (req, res) => {
   User.find({ role: "professional" })
-    .then((user) => res.status(200).json(user))
+    .populate("collective")
+    .populate("createdPacks")
+    .then((users) => {
+      res.status(200).json(
+        users.map(function (user) {
+          return {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+            name: user.name,
+            phone: user.phone,
+            image: user.image,
+            description: user.description,
+            collective: user.collective,
+            following: user.following,
+            followers: user.followers,
+            createdActivites: user.createdActivites,
+            createdPacks: user.createdPacks,
+            purchasedPacks: user.purchasedPacks,
+          };
+        })
+      );
+    })
     .catch((err) => res.status(500).json(err));
 };
 
-// exports.getProfessionalById = (req, res) => {};
+exports.getProfessionalById = (req, res) => {
+  User.findById(req.params.userId)
+    .populate("collective")
+    .then((user) =>
+      res.status(200).json({
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        name: user.name,
+        phone: user.phone,
+        image: user.image,
+        description: user.description,
+        collective: user.collective,
+        following: user.following,
+        followers: user.followers,
+        createdActivites: user.createdActivites,
+        createdPacks: user.createdPacks,
+        purchasedPacks: user.purchasedPacks,
+      })
+    )
+    .catch((err) => res.status(500).json(err));
+};
 
 exports.getUserById = (req, res) => {
   User.findById(req.params.userId)
-    .then((user) => res.status(200).json(user))
+    .populate("collective")
+    .then((user) =>
+      res.status(200).json({
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        name: user.name,
+        phone: user.phone,
+        image: user.image,
+        description: user.description,
+        collective: user.collective,
+        following: user.following,
+        followers: user.followers,
+        createdActivites: user.createdActivites,
+        createdPacks: user.createdPacks,
+        purchasedPacks: user.purchasedPacks,
+      })
+    )
     .catch((err) => res.status(500).json(err));
 };
 

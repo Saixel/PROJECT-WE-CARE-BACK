@@ -9,6 +9,10 @@ const packageSchema = mongoose.Schema({
     type: String,
     required: [true, "Description is required"],
   },
+  instructions: {
+    type: String,
+    required: [true, "Instructions are required"],
+  },
   price: {
     type: String,
     enum: ["paid", "free"],
