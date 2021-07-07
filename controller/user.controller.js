@@ -18,11 +18,11 @@ exports.getProfessionals = (req, res) => {
 
 // exports.getProfessionalById = (req, res) => {};
 
-// exports.getUserById = (req, res) => {
-//   User.findById(req.params.userId)
-//     .then((user) => res.status(200).json(user))
-//     .catch((err) => res.status(500).json(err));
-// };
+exports.getUserById = (req, res) => {
+  User.findById(req.params.userId)
+    .then((user) => res.status(200).json(user))
+    .catch((err) => res.status(500).json(err));
+};
 
 // exports.updateUser = (req, res) => {
 //   User.findOneAndUpdate(req.query, req.body, { new: true })
