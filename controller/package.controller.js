@@ -1,5 +1,7 @@
 const { Package } = require("../models/package.model");
 const { Collective } = require("../models/collective.model");
+const { User } = require("../models/user.model");
+const { Activity } = require("../models/activity.model");
 
 exports.createPackage = (req, res) => {
   Package.create(req.body)
@@ -20,6 +22,8 @@ exports.createPackage = (req, res) => {
 exports.getPackages = (req, res) => {
   Package.find()
     .populate("collective")
+    .populate("author")
+    .populate("content")
     .then((packages) => {
       res.status(200).json(
         packages.map(function (package) {
