@@ -23,7 +23,7 @@ app.listen(3000, (err) => {
 mongoose.connect(
   process.env.MONGO_URL_PROD || "mongodb://localhost:27017/",
   {
-    dbName: "wecare",
+    dbName: MONGO_DB,
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
