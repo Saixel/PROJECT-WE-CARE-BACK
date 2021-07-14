@@ -26,10 +26,13 @@ exports.signup = (req, res) => {
 };
 
 exports.login = (req, res) => {
+  console.log('ENTRO EN EL CONTROLADOR', req.body)
   User.findOne({ email: req.body.email })
     .then((user) => {
+      console.log('USUARIO ENCONTRADO', user)
       if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
+          console.log('CONTRASEÑA CORRECTA')
           const data = {
             email: user.email,
             role: user.role,
@@ -37,6 +40,7 @@ exports.login = (req, res) => {
           const token = jwt.sign(data, process.env.JWT_SECRET || "secret", {
             expiresIn: "7d",
           });
+          console.log('TOKEN CREADO')
           res.status(200).json({ token: token, ...data });
         } else {
           res.send("Passwords do not match");

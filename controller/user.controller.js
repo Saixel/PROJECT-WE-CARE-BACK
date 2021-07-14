@@ -3,9 +3,9 @@ const { Collective } = require("../models/collective.model");
 const { Package } = require("../models/package.model");
 
 exports.whoami = (req, res) => {
-  console.log('PRUEBAAA')
-  // res.status(200).json(res.locals.user);
-  res.status(200).json('HOLAAAAAAAA');
+  // console.log('PRUEBAAA')
+  res.status(200).json({ user: res.locals.user });
+  // res.status(200).json('HOLAAAAAAAA');
 };
 
 exports.getUsers = (req, res) => {

@@ -3,11 +3,13 @@ const { User } = require("../models/user.model");
 
 // Authenticate Middleware
 exports.authenticate = async (req, res, next) => {
-  if (!req.headers.token) {
+  console.log(req.headers)
+  const token = req.headers.authorization.split(' ')[1]
+  if (!token) {
     res.status(403).json({ error: "No token found" });
   } else {
     jwt.verify(
-      req.headers.token,
+      token,
       process.env.JWT_SECRET || "secret",
       (err, token) => {
         if (err) {
