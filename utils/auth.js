@@ -3,7 +3,7 @@ const { User } = require("../models/user.model");
 
 // Authenticate Middleware
 exports.authenticate = async (req, res, next) => {
-  console.log(req.headers)
+  // console.log(req.headers)
   const token = req.headers.authorization.split(' ')[1]
   if (!token) {
     res.status(403).json({ error: "No token found" });
@@ -15,8 +15,11 @@ exports.authenticate = async (req, res, next) => {
         if (err) {
           res.status(403).json({ error: "Token not valid" });
         }
+        console.log('TOKEN HERE --->', token)
         User.findOne({ email: token.email })
-          .then((user) => {
+        .select({ password: 0 })
+        .then((user) => {
+            console.log('---------->', user)
             res.locals.user = user;
             next();
           })

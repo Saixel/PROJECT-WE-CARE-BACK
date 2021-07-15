@@ -3,36 +3,37 @@ const { Collective } = require("../models/collective.model");
 const { Package } = require("../models/package.model");
 
 exports.whoami = (req, res) => {
-  // console.log('PRUEBAAA')
+  console.log('Entro al whoami')
   res.status(200).json({ user: res.locals.user });
-  // res.status(200).json('HOLAAAAAAAA');
 };
 
 exports.getUsers = (req, res) => {
   User.find()
     .populate("collective")
-    .then((users) => {
-      res.status(200).json(
-        users.map(function (user) {
-          return {
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            role: user.role,
-            name: user.name,
-            phone: user.phone,
-            image: user.image,
-            description: user.description,
-            collective: user.collective,
-            following: user.following,
-            followers: user.followers,
-            createdActivites: user.createdActivites,
-            createdPacks: user.createdPacks,
-            purchasedPacks: user.purchasedPacks,
-          };
-        })
-      );
-    })
+    .select({ password: 0 })
+    .then((users) => res.status(200).json(users))
+    // .then((users) => {
+    //   res.status(200).json(
+    //     users.map(function (user) {
+    //       return {
+    //         id: user._id,
+    //         username: user.username,
+    //         email: user.email,
+    //         role: user.role,
+    //         name: user.name,
+    //         phone: user.phone,
+    //         image: user.image,
+    //         description: user.description,
+    //         collective: user.collective,
+    //         following: user.following,
+    //         followers: user.followers,
+    //         createdActivites: user.createdActivites,
+    //         createdPacks: user.createdPacks,
+    //         purchasedPacks: user.purchasedPacks,
+    //       };
+    //     })
+    //   );
+    // })
     .catch((err) => res.status(500).json(err));
 };
 
