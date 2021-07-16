@@ -16,7 +16,7 @@ app.listen(process.env.PORT || 3000, (err) => {
   }
   console.info(">".repeat(40));
   console.info("💻  WE CARE API ALIVE");
-  console.info(`📡  PORT: http://localhost:3000`);
+  console.info(`📡  PORT: http://localhost:8000`);
   console.info(">".repeat(40) + "\n");
 });
 
