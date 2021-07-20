@@ -1,5 +1,4 @@
 const { Activity } = require("../models/activity.model");
-const { Collective } = require("../models/collective.model");
 
 exports.createActivity = (req, res) => {
   Activity.create(req.body)
@@ -7,7 +6,7 @@ exports.createActivity = (req, res) => {
     .catch((err) => res.status(500).json(err));
 };
 
-// ESTO HAY QUE MOVERLO
+// ESTO HAY QUE MOVERLO A UTILS
 function shuffle(string) {
   var array = string.split(" ");
   var currentIndex = array.length,
@@ -28,7 +27,6 @@ function shuffle(string) {
 
 exports.getActivities = (req, res) => {
   Activity.find()
-    .populate("collective")
     .then((activities) => {
       res.status(200).json(
         activities.map(function (activity) {
@@ -48,20 +46,19 @@ exports.getActivities = (req, res) => {
     .catch((err) => res.status(500).json(err));
 };
 
-exports.getActivitiesByCollective = (req, res) => {
-  Activity.find({ collective: req.params.collectiveId })
-    .then((activities) => res.status(200).json(activities))
+exports.getActivitiesByCollec = (req, res) => {
+  Activity.find()
+    .then((activities) => {
+      const activitiesByCollective = activities.filter((item) =>
+        item.collective.includes(req.params.collectiveId)
+      );
+      res.status(200).json(activitiesByCollective);
+    })
     .catch((err) => res.status(500).json(err));
 };
 
 exports.getActivitiesByAuthor = (req, res) => {
   Activity.find({ author: req.params.authorId })
-    .then((activities) => res.status(200).json(activities))
-    .catch((err) => res.status(500).json(err));
-};
-
-exports.getActivitiesByType = (req, res) => {
-  Activity.find({ type: req.params.type })
     .then((activities) => res.status(200).json(activities))
     .catch((err) => res.status(500).json(err));
 };

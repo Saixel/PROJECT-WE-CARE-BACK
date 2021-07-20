@@ -5,18 +5,16 @@ const { authenticate, authorize } = require("../utils/auth");
 const {
   createActivity,
   getActivities,
-  getActivitiesByCollective,
-  getActivitiesByAuthor,
-  getActivitiesByType,
   getActivityById,
+  getActivitiesByCollec,
+  getActivitiesByAuthor,
 } = require("../controller/activity.controller");
 
-router.post("/", createActivity);
-router.get("/", getActivities);
-router.get("/collectives/:collectiveId", getActivitiesByCollective);
-router.get("/author/:authorId", getActivitiesByAuthor);
-router.get("/type/:type", getActivitiesByType);
-router.get("/:activityId", getActivityById);
+router.post("/", authenticate, createActivity);
+router.get("/", authenticate, getActivities);
+router.get("/:activityId", authenticate, getActivityById);
+router.get("/collectives/:collectiveId", authenticate, getActivitiesByCollec);
+router.get("/author/:authorId", authenticate, getActivitiesByAuthor);
 // router.put("/:activityId", authenticate, authorize("admin"), updateActivity);
 // router.delete("/:activityId", authenticate, authorize("admin"), deleteActivity);
 

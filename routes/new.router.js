@@ -5,8 +5,8 @@ const { authenticate, authorize } = require("../utils/auth");
 const {
   // createNew,
   getNews,
-  getNewsByCollective,
   getNewById,
+  getNewsByCollective,
 } = require("../controller/new.controller");
 
 // router.post("/", createNew);

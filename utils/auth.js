@@ -12,7 +12,6 @@ exports.authenticate = async (req, res, next) => {
         res.status(403).json({ error: "Token not valid" });
       }
       User.findOne({ email: token.email })
-        .select({ password: 0 })
         .then((user) => {
           res.locals.user = user;
           next();
@@ -22,6 +21,7 @@ exports.authenticate = async (req, res, next) => {
   }
 };
 
+// AUTHORIZE MIDDLEWARE
 exports.authorize = (roles) => {
   return (req, res, next) => {
     if (!roles.includes(res.locals.user.role)) {

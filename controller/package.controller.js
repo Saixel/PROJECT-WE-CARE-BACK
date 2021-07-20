@@ -1,7 +1,7 @@
 const { Package } = require("../models/package.model");
 const { Collective } = require("../models/collective.model");
-const { User } = require("../models/user.model");
 const { Activity } = require("../models/activity.model");
+const { User } = require("../models/user.model");
 
 exports.createPackage = (req, res) => {
   Package.create(req.body)
@@ -13,30 +13,21 @@ exports.getPackages = (req, res) => {
   Package.find()
     .populate("collective")
     .populate("author")
-    .populate("content")
-    .then((packages) => {
-      res.status(200).json(
-        packages.map(function (package) {
-          return {
-            id: package._id,
-            title: package.title,
-            description: package.description,
-            instructions: package.instructions,
-            price: package.price,
-            date: package.date,
-            author: package.author,
-            collective: package.collective,
-            content: package.content,
-          };
-        })
-      );
-    })
+    .select({ content: 0})
+    .then((packages) => res.status(200).json(packages))
     .catch((err) => res.status(500).json(err));
 };
 
 exports.getPackagesByCollective = (req, res) => {
-  Package.find({ collective: req.params.collectiveId })
-    .then((packages) => res.status(200).json(packages))
+  Package.find()
+    .populate("collective")
+    .then((packages) => {
+      const packagesByCollective = packages.filter((item) =>
+        // item.collective.includes(req.params.collectiveId)
+        item.collective.filter(obj => obj._id === req.params.collectiveId)
+      );
+      res.status(200).json(packagesByCollective);
+    })
     .catch((err) => res.status(500).json(err));
 };
 

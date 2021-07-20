@@ -5,10 +5,10 @@ const { authenticate, authorize } = require("../utils/auth");
 const {
   createPackage,
   getPackages,
+  getPackageById,
   getPackagesByCollective,
   getPackagesByAuthor,
   getPackagesByPrice,
-  getPackageById,
 } = require("../controller/package.controller");
 
 router.post("/", authenticate, createPackage);

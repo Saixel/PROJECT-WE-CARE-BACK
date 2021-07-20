@@ -16,7 +16,6 @@ exports.getNewById = (req, res) => {
 
 exports.getNewsByCollective = (req, res) => {
   New.find()
-    // .then((news) => res.status(200).json(news))
     .then((news) => {
       const newsByCollective = news.filter(item => item.collective.includes(req.params.collectiveId))
       res.status(200).json(newsByCollective)

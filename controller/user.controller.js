@@ -7,7 +7,6 @@ exports.whoami = (req, res) => {
 
 exports.getUsers = (req, res) => {
   User.find()
-    .populate("collective")
     .then((users) => res.status(200).json(users))
     .catch((err) => res.status(500).json(err));
 };
@@ -28,7 +27,6 @@ exports.getProfessionalById = (req, res) => {
 
 exports.getUserById = (req, res) => {
   User.findById(req.params.userId)
-    .populate("collective")
     .then((user) => res.status(200).json(user))
     .catch((err) => res.status(500).json(err));
 };
