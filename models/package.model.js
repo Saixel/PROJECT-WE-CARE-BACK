@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const packageSchema = mongoose.Schema({
   title: {
     type: String,
-    required: [true, "Title is required"],
+    required: [true, 'Title is required'],
   },
   description: {
     type: String,
-    required: [true, "Description is required"],
+    required: [true, 'Description is required'],
   },
   instructions: {
     type: String,
-    required: [true, "Instructions are required"],
+    required: [true, 'Instructions are required'],
   },
   price: {
     type: String,
-    enum: ["paid", "free"],
+    enum: ['paid', 'free'],
   },
   date: {
     type: Date,
@@ -23,20 +23,20 @@ const packageSchema = mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: 'users',
   },
   collective: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "collectives",
+      ref: 'collectives',
     },
   ],
   content: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "activities",
+      ref: 'activities',
     },
   ],
-});
+})
 
-exports.Package = mongoose.model("packages", packageSchema);
+exports.Package = mongoose.model('packages', packageSchema)

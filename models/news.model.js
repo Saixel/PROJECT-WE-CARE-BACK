@@ -1,14 +1,22 @@
 const mongoose = require('mongoose')
 
-const activitySchema = mongoose.Schema({
+const newsSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, 'Title is required'],
   },
-  description: String,
-  instructions: {
+  body: {
     type: String,
-    required: [true, 'Instructions are required'],
+    required: [true, 'Body is required'],
+  },
+  type: {
+    type: String,
+    enum: ['news', 'interviews'],
+    default: 'news',
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -20,7 +28,6 @@ const activitySchema = mongoose.Schema({
       ref: 'collectives',
     },
   ],
-  phrase: String,
 })
 
-exports.Activity = mongoose.model('activities', activitySchema)
+exports.News = mongoose.model('news', newsSchema)

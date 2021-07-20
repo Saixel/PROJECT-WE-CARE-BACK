@@ -1,24 +1,24 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
   username: {
     type: String,
-    required: [true, "Username is required"],
+    required: [true, 'Username is required'],
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
-    unique: [true, "Theres already a user with this email"],
+    required: [true, 'Email is required'],
+    unique: [true, 'Theres already a user with this email'],
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, 'Password is required'],
     select: false,
   },
   role: {
     type: String,
-    enum: ["user", "professional", "admin"],
-    default: "user",
+    enum: ['user', 'professional', 'admin'],
+    default: 'user',
   },
   name: String,
   phone: Number,
@@ -27,39 +27,39 @@ const userSchema = mongoose.Schema({
   collective: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "collectives",
+      ref: 'collectives',
     },
   ],
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: 'users',
     },
   ],
   followers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: 'users',
     },
   ],
   createdActivities: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "activities",
+      ref: 'activities',
     },
   ],
   createdPacks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "packages",
+      ref: 'packages',
     },
   ],
   purchasedPacks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "packages",
+      ref: 'packages',
     },
   ],
-});
+})
 
-exports.User = mongoose.model("users", userSchema);
+exports.User = mongoose.model('users', userSchema)
