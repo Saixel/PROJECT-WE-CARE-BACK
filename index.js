@@ -10,18 +10,18 @@ const app = express()
   .use(express.json())
   .use("/api", require("./routes/index"));
 
-app.listen(3000, (err) => {
+app.listen(8000, (err) => {
   if (err) {
     throw new Error(err);
   }
   console.info(">".repeat(40));
   console.info("💻  WE CARE API ALIVE");
-  console.info(`📡  PORT: http://localhost:3000`);
+  console.info(`📡  PORT: http://localhost:8000`);
   console.info(">".repeat(40) + "\n");
 });
 
 mongoose.connect(
-  process.env.MONGO_URL_PROD || "mongodb://localhost:27017/",
+  process.env.MONGO_URL_PROD,
   {
     dbName: process.env.MONGO_DB,
     useNewUrlParser: true,
