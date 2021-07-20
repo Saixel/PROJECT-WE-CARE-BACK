@@ -5,17 +5,7 @@ const { Activity } = require("../models/activity.model");
 
 exports.createPackage = (req, res) => {
   Package.create(req.body)
-    .then((package) => res.status(200).json({
-            id: package._id,
-            title: package.title,
-            description: package.description,
-            instructions: package.instructions,
-            price: package.price,
-            date: package.date,
-            author: package.author,
-            collective: package.collective,
-            content: package.content,
-          }))
+    .then((package) => res.status(200).json(package))
     .catch((err) => res.status(500).json(err));
 };
 

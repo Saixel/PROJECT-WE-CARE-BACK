@@ -11,8 +11,8 @@ const {
 
 // router.post("/", createNew);
 router.get("/", getNews);
-router.get("/collectives/:collectiveId", getNewsByCollective);
 router.get("/:newId", getNewById);
+router.get("/collectives/:collectiveId", getNewsByCollective);
 // router.put("/:newId", authenticate, authorize("admin"), updateNew);
 // router.delete("/:newId", authenticate, authorize("admin"), deleteNew);
 

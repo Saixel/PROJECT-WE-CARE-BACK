@@ -15,6 +15,7 @@ exports.signup = (req, res) => {
         const data = {
           email: user.email,
           role: user.role,
+          id: user._id,
         };
         const token = jwt.sign(data, process.env.JWT_SECRET || "secret", {
           expiresIn: "7d",
@@ -27,22 +28,24 @@ exports.signup = (req, res) => {
 
 exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
+    .select("email role password")
     .then((user) => {
       if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
           const data = {
             email: user.email,
             role: user.role,
+            id: user._id,
           };
           const token = jwt.sign(data, process.env.JWT_SECRET || "secret", {
             expiresIn: "7d",
           });
           res.status(200).json({ token: token, ...data });
         } else {
-          res.send("Passwords do not match");
+          res.status(404).send("Passwords do not match");
         }
       } else {
-        res.send("User email not found");
+        res.status(404).send("User email not found");
       }
     })
     .catch((err) => res.status(500).send(err));
