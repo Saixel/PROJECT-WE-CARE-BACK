@@ -10,7 +10,7 @@ const app = express()
   .use(express.json())
   .use('/api', require('./routes/index'))
 
-app.listen(8000, (err) => {
+app.listen(process.env.PORT, (err) => {
   if (err) {
     throw new Error(err)
   }
