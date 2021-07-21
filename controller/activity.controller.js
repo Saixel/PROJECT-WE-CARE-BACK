@@ -31,7 +31,7 @@ exports.getActivities = (req, res) => {
       res.status(200).json(
         activities.map(function (activity) {
           return {
-            id: activity._id,
+            _id: activity._id,
             title: activity.title,
             description: activity.description,
             instructions: activity.instructions,

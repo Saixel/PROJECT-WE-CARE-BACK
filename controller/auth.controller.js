@@ -40,7 +40,7 @@ exports.signup = async (req, res) => {
       const data = {
         email: user.email,
         role: user.role,
-        id: user._id,
+        _id: user._id,
       }
 
       const token = jwt.sign(data, process.env.JWT_SECRET || 'secret', {
@@ -63,7 +63,7 @@ exports.login = (req, res) => {
           const data = {
             email: user.email,
             role: user.role,
-            id: user._id,
+            _id: user._id,
           }
           const token = jwt.sign(data, process.env.JWT_SECRET || 'secret', {
             expiresIn: '7d',
