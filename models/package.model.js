@@ -16,7 +16,10 @@ const packageSchema = mongoose.Schema({
   price: {
     type: String,
     enum: ['paid', 'free'],
+    required: [true, 'Price type are required'],
   },
+  cost: Number,
+  score: Number,
   date: {
     type: Date,
     default: Date.now,

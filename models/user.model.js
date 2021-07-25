@@ -24,6 +24,7 @@ const userSchema = mongoose.Schema({
   phone: Number,
   image: String,
   description: String,
+  score: Number,
   collective: [
     {
       type: mongoose.Schema.Types.ObjectId,
