@@ -1,5 +1,6 @@
 const { News } = require('../models/news.model')
 
 exports.newPayment = (req, res) => {
-  console.log('PAYMENT TEST')
+  console.log('BODY ----->', req.body)
+  console.log('PARAMS ----->', req.params)
 };

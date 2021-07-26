@@ -12,6 +12,6 @@ router.use('/users', userRouter)
 router.use('/news', newsRouter)
 router.use('/content', packageRouter)
 router.use('/activities', activityRouter)
-router.use('/payments', activityRouter)
+router.use('/payments', paymentsRouter)
 
 module.exports = router
