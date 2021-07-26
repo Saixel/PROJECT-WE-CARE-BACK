@@ -6,6 +6,7 @@ const {
   createPackage,
   getPackages,
   getPackageById,
+  getActivitiesByPackage,
   getPackagesByCollective,
   getPackagesByAuthor,
   getPackagesByPrice,
@@ -14,6 +15,7 @@ const {
 router.post('/', authenticate, createPackage)
 router.get('/', getPackages)
 router.get('/:packageId', getPackageById)
+router.get('/:packageId/activities', getActivitiesByPackage)
 router.get('/collective/:collectiveId', getPackagesByCollective)
 router.get('/author/:authorId', getPackagesByAuthor)
 router.get('/price/:price', getPackagesByPrice)
